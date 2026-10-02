@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ cake.name }} - Sweet Cake{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row g-5 align-items-start">
+
+        <!-- Cake Image -->
+        <div class="col-12 col-md-6">
+
+            <div class="ratio ratio-4x3">
+                <img src="{{ cake.image_url }}"
+                     alt="{{ cake.name }}"
+                     class="img-fluid rounded object-fit-cover">
+            </div>
+
+        </div>
+
+
+        <!-- Cake Details -->
+        <div class="col-12 col-md-6">
+
+            <p class="text-warning fw-bold">
+                {{ cake.category.name }}
+            </p>
+
+            <h1 class="fw-bold">
+                {{ cake.name }}
+            </h1>
+
+            <h3 class="text-warning fw-bold my-3">
+                ₹{{ cake.price }}
+            </h3>
+
+
+            <!-- Description -->
+            <h5 class="fw-bold mt-4">
+                Description
+            </h5>
+
+            <p class="text-secondary">
+                {{ cake.description }}
+            </p>
+
+
+            <!-- Ingredients -->
+            <h5 class="fw-bold mt-4">
+                Ingredients
+            </h5>
+
+            <p class="text-secondary">
+                {{ cake.ingredients|linebreaksbr }}
+            </p>
+
+
+            <!-- Recipe -->
+            <h5 class="fw-bold mt-4">
+                Recipe
+            </h5>
+
+            <p class="text-secondary">
+                {{ cake.recipe|linebreaksbr }}
+            </p>
+
+
+            <!-- Availability -->
+            {% if cake.available %}
+
+                <p class="text-success fw-semibold">
+                    Available
+                </p>
+
+
+                <!-- Add to Cart -->
+                <form method="post"
+                      action="{% url 'add_to_cart' cake.id %}"
+                      class="d-inline">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="btn btn-warning fw-semibold">
+                        🛒 Add to Cart
+                    </button>
+
+                </form>
+
+
+                <!-- Order Now -->
+                <a href="{% url 'order_now' cake.id %}"
+                   class="btn btn-dark fw-semibold">
+                    🛍️ Order Now
+                </a>
+
+
+            {% else %}
+
+                <p class="text-danger fw-semibold">
+                    Not Available
+                </p>
+
+            {% endif %}
+
+
+            <!-- Back Button -->
+            <div class="mt-3">
+
+                <a href="{% url 'home' %}"
+                   class="btn btn-outline-dark">
+                    ← Back to Cakes
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= RECOMMENDED PRODUCTS ================= -->
+
+{% if recommendations %}
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="display-6 fw-bold">
+            Recommended Products
+        </h2>
+
+        <p class="text-secondary">
+            You may also like these cakes
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        {% for recommended in recommendations %}
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <!-- Cake Image -->
+
+                <div class="ratio ratio-4x3">
+
+                    <img
+                        src="{{ recommended.image_url }}"
+                        alt="{{ recommended.name }}"
+                        class="w-100 h-100 object-fit-cover rounded-top">
+
+                </div>
+
+
+                <!-- Cake Information -->
+
+                <div class="card-body text-center d-flex flex-column">
+
+                    <h5 class="fw-bold text-uppercase">
+                        {{ recommended.name }}
+                    </h5>
+
+                    <p class="text-secondary small mb-2">
+                        {{ recommended.category.name }}
+                    </p>
+
+                    <h5 class="text-warning fw-bold">
+                        ₹{{ recommended.price }}
+                    </h5>
+
+
+                    <!-- Buttons -->
+
+                    <div class="mt-auto pt-2">
+
+                        <a href="{% url 'cake_detail' recommended.id %}"
+                           class="btn btn-dark btn-sm">
+
+                            VIEW DETAILS
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endif %}
+
+{% endblock %}

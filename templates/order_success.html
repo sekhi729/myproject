@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Successful - Sweet Cake{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card shadow border-0 text-center">
+
+                <div class="card-body p-5">
+
+                    <div class="display-3 mb-3">
+                        ✅
+                    </div>
+
+                    <h1 class="fw-bold mb-3">
+                        Order Placed Successfully!
+                    </h1>
+
+                    <p class="text-secondary mb-4">
+                        Thank you for ordering from Sweet Cake.
+                    </p>
+
+                    <div class="card bg-light border-0 mb-4">
+
+                        <div class="card-body text-start">
+
+                            <p class="mb-2">
+                                <strong>Order Number:</strong>
+                                #{{ order.id }}
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Customer:</strong>
+                                {{ order.user.username }}
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Payment Method:</strong>
+                                {{ order.get_payment_method_display }}
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Total Amount:</strong>
+                                ₹{{ order.total_amount }}
+                            </p>
+
+                            <p class="mb-0">
+                                <strong>Status:</strong>
+                                {{ order.status }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <a href="{% url 'home' %}"
+                       class="btn btn-dark px-4 me-2">
+                        🏠 Back to Home
+                    </a>
+
+                    <a href="{% url 'home' %}#shop"
+                       class="btn btn-outline-dark px-4">
+                        🍰 Continue Shopping
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

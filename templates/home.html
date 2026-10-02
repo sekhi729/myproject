@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sweet Cake - Online Cake Shop</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-white">
+
+<!-- ================= HEADER ================= -->
+
+<header class="container-fluid py-3 bg-white border-bottom">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-4 text-center text-md-start mb-2 mb-md-0">
+
+                <span class="text-secondary small">
+    India ₹ |
+</span>
+
+{% if user.is_authenticated %}
+
+    <span class="text-dark small">
+        Hi, {{ user.username }} |
+    </span>
+
+    <a href="{% url 'logout' %}"
+       class="text-dark text-decoration-none small">
+        Logout
+    </a>
+
+{% else %}
+
+    <a href="{% url 'login' %}"
+       class="text-dark text-decoration-none small">
+        Sign In
+    </a>
+
+    <span class="text-secondary small">
+        |
+    </span>
+
+    <a href="{% url 'register' %}"
+       class="text-dark text-decoration-none small">
+        Sign Up
+    </a>
+
+{% endif %}
+
+            </div>
+
+
+            <div class="col-md-4 text-center">
+
+                <h2 class="fw-bold mb-0">
+                    🧁 <span class="text-warning">cake</span>
+                </h2>
+
+            </div>
+
+
+            <div class="col-md-4 text-center text-md-end">
+
+                <a href="#shop"
+                   class="text-decoration-none text-dark fs-5 me-3">
+                    🔍
+                </a>
+
+                <a href="{% url 'wishlist' %}"
+   class="text-decoration-none text-dark fs-5 me-3">
+    ♡
+</a>
+
+                <a href="{% url 'cart' %}"
+                   class="text-decoration-none text-dark fs-5">
+                    🛍️
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container justify-content-center">
+
+        <div class="navbar-nav">
+
+            <a class="nav-link px-3 active"
+               href="#home">
+                Home
+            </a>
+
+            <a class="nav-link px-3"
+               href="#about">
+                About
+            </a>
+
+            <a class="nav-link px-3"
+               href="#shop">
+                Shop
+            </a>
+
+            <a class="nav-link px-3"
+               href="#contact">
+                Contact
+            </a>
+
+            <a class="nav-link px-3"
+            href="{% url 'orders' %}">
+             Orders
+              </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section id="home"
+         class="container-fluid bg-light py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6 text-center text-lg-start py-5">
+
+                <p class="text-warning fw-bold">
+                    WELCOME TO SWEET CAKE
+                </p>
+
+                <h1 class="display-4 fw-bold">
+                    Making your life sweeter
+                    one bite at a time!
+                </h1>
+
+                <p class="lead text-secondary mt-4">
+                    Freshly baked cakes made with love
+                    for every special moment.
+                </p>
+
+                <a href="#shop"
+                   class="btn btn-warning text-white px-4 py-3 mt-3">
+                    OUR CAKES
+                </a>
+
+            </div>
+
+
+            <div class="col-lg-6 text-center">
+
+                <img
+                    src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80"
+                    class="img-fluid rounded shadow"
+                    alt="Sweet Cake">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about"
+         class="container py-5 my-4">
+
+    <div class="row align-items-center g-5">
+
+        <div class="col-lg-6">
+
+            <h2 class="display-6 fw-bold">
+                Cakes and bakes from the house of Queens!
+            </h2>
+
+            <p class="text-secondary mt-4 lh-lg">
+                Sweet Cake Shop is an online cake shop
+                created for people who love delicious cakes
+                and sweet treats. We prepare fresh cakes for
+                birthdays, anniversaries and every special
+                occasion.
+            </p>
+
+        </div>
+
+
+        <div class="col-lg-6">
+
+            <div class="mb-4">
+
+                <div class="d-flex justify-content-between">
+
+                    <span class="fw-bold small">
+                        CAKE QUALITY
+                    </span>
+
+                    <span class="small">
+                        95%
+                    </span>
+
+                </div>
+
+                <div class="progress mt-2">
+
+                    <div class="progress-bar bg-warning w-100"
+                         role="progressbar"
+                         aria-label="Cake Quality">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="mb-4">
+
+                <div class="d-flex justify-content-between">
+
+                    <span class="fw-bold small">
+                        CAKE RECIPES
+                    </span>
+
+                    <span class="small">
+                        90%
+                    </span>
+
+                </div>
+
+                <div class="progress mt-2">
+
+                    <div class="progress-bar bg-warning w-100"
+                         role="progressbar"
+                         aria-label="Cake Recipes">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="mb-4">
+
+                <div class="d-flex justify-content-between">
+
+                    <span class="fw-bold small">
+                        CUSTOMER SERVICE
+                    </span>
+
+                    <span class="small">
+                        92%
+                    </span>
+
+                </div>
+
+                <div class="progress mt-2">
+
+                    <div class="progress-bar bg-warning w-100"
+                         role="progressbar"
+                         aria-label="Customer Service">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="display-6 fw-bold">
+            Our Categories
+        </h2>
+
+        <p class="text-secondary">
+            Choose your favourite cake category
+        </p>
+
+    </div>
+
+
+    <div class="row justify-content-center g-3">
+
+        <!-- ALL -->
+
+        <div class="col-6 col-md-2">
+
+            <a href="{% url 'home' %}#shop"
+               class="text-decoration-none">
+
+                <div class="card text-center h-100 border-warning shadow-sm">
+
+                    <div class="card-body">
+
+                        <div class="display-5">
+                            🍰
+                        </div>
+
+                        <h6 class="mt-2 text-dark">
+                            ALL
+                        </h6>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <!-- CUPCAKE -->
+
+        <div class="col-6 col-md-2">
+
+            <a href="{% url 'home' %}?category=Cupcake#shop"
+               class="text-decoration-none">
+
+                <div class="card text-center h-100 shadow-sm">
+
+                    <div class="card-body">
+
+                        <div class="display-5">
+                            🧁
+                        </div>
+
+                        <h6 class="mt-2 text-dark">
+                            CUPCAKE
+                        </h6>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <!-- CHOCOLATE -->
+
+        <div class="col-6 col-md-2">
+
+            <a href="{% url 'home' %}?category=Chocolate#shop"
+               class="text-decoration-none">
+
+                <div class="card text-center h-100 shadow-sm">
+
+                    <div class="card-body">
+
+                        <div class="display-5">
+                            🍫
+                        </div>
+
+                        <h6 class="mt-2 text-dark">
+                            CHOCOLATE
+                        </h6>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <!-- RED VELVET -->
+
+        <div class="col-6 col-md-2">
+
+            <a href="{% url 'home' %}?category=Red%20Velvet#shop"
+               class="text-decoration-none">
+
+                <div class="card text-center h-100 shadow-sm">
+
+                    <div class="card-body">
+
+                        <div class="display-5">
+                            🎂
+                        </div>
+
+                        <h6 class="mt-2 text-dark">
+                            RED VELVET
+                        </h6>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <!-- VANILLA -->
+
+        <div class="col-6 col-md-2">
+
+            <a href="{% url 'home' %}?category=Vanilla#shop"
+               class="text-decoration-none">
+
+                <div class="card text-center h-100 shadow-sm">
+
+                    <div class="card-body">
+
+                        <div class="display-5">
+                            🍰
+                        </div>
+
+                        <h6 class="mt-2 text-dark">
+                            VANILLA
+                        </h6>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SHOP ================= -->
+
+<section id="shop"
+         class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="display-6 fw-bold">
+            Our Cakes
+        </h2>
+
+        <p class="text-secondary">
+            Freshly baked and made with love
+        </p>
+
+    </div>
+
+
+    <!-- ================= SEARCH ================= -->
+
+    <div class="row align-items-center mb-4">
+
+        <div class="col-md-6 mb-3 mb-md-0">
+
+            <h6 class="mb-0">
+
+                {% if cakes %}
+                    {{ cakes|length }} Cakes Available
+                {% else %}
+                    No Cakes Available
+                {% endif %}
+
+            </h6>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <form method="get"
+                  action="{% url 'home' %}#shop"
+                  class="input-group">
+
+                {% if request.GET.category %}
+
+                    <input type="hidden"
+                           name="category"
+                           value="{{ request.GET.category }}">
+
+                {% endif %}
+
+
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ request.GET.q|default:'' }}"
+                    class="form-control"
+                    placeholder="Search cake...">
+
+
+                <button
+                    type="submit"
+                    class="btn btn-warning text-white">
+
+                    🔍 Search
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PRODUCTS ================= -->
+
+    <div class="row g-4">
+
+        {% for cake in cakes %}
+
+        <div class="col-sm-6 col-lg-3">
+
+            <div class="card h-100 shadow-sm border-0">
+
+
+                <!-- CAKE IMAGE + WISHLIST -->
+
+                <div class="ratio ratio-4x3 position-relative">
+
+                    <img
+                        src="{{ cake.image_url }}"
+                        class="w-100 h-100 object-fit-cover rounded-top"
+                        alt="{{ cake.name }}">
+
+
+                    <!-- WISHLIST -->
+
+                    <form method="post"
+                          action="{% url 'toggle_wishlist' cake.id %}"
+                          class="position-absolute top-0 end-0 m-2">
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="btn btn-light btn-sm rounded-circle shadow">
+
+                            {% if cake.id in wishlist_ids %}
+                                ❤️
+                            {% else %}
+                                ♡
+                            {% endif %}
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="card-body text-center d-flex flex-column">
+
+
+                    <!-- CAKE NAME -->
+
+                    <h5 class="card-title text-uppercase">
+                        {{ cake.name }}
+                    </h5>
+
+
+                    <!-- CATEGORY -->
+
+                    <p class="text-secondary small mb-2">
+                        {{ cake.category.name }}
+                    </p>
+
+
+                    <!-- PRICE -->
+
+                    <h5 class="text-warning fw-bold">
+                        ₹{{ cake.price }}
+                    </h5>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="mt-auto pt-2">
+
+
+                        <!-- ADD TO CART -->
+
+                        <form method="post"
+                              action="{% url 'add_to_cart' cake.id %}"
+                              class="d-inline">
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="btn btn-warning text-white btn-sm me-1">
+
+                                ADD TO CART
+
+                            </button>
+
+                        </form>
+
+
+                        <!-- DETAILS -->
+
+                        <a href="{% url 'cake_detail' cake.id %}"
+                           class="btn btn-dark btn-sm">
+
+                            DETAILS
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+        <div class="col-12">
+
+            <div class="alert alert-warning text-center">
+
+                No cakes found.
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- ================= PERSONALIZED RECOMMENDATIONS ================= -->
+
+{% if user.is_authenticated and personalized_cakes %}
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="display-6 fw-bold">
+            Recommended For You
+        </h2>
+
+        <p class="text-secondary">
+            Cakes you may like based on your preferences
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        {% for cake in personalized_cakes %}
+
+        <div class="col-sm-6 col-lg-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <div class="ratio ratio-4x3">
+
+                    <img
+                        src="{{ cake.image_url }}"
+                        class="w-100 h-100 object-fit-cover rounded-top"
+                        alt="{{ cake.name }}">
+
+                </div>
+
+                <div class="card-body text-center d-flex flex-column">
+
+                    <h5 class="fw-bold text-uppercase">
+                        {{ cake.name }}
+                    </h5>
+
+                    <p class="text-secondary small mb-2">
+                        {{ cake.category.name }}
+                    </p>
+
+                    <h5 class="text-warning fw-bold">
+                        ₹{{ cake.price }}
+                    </h5>
+
+                    <div class="mt-auto pt-2">
+
+                        <a href="{% url 'cake_detail' cake.id %}"
+                           class="btn btn-dark btn-sm">
+
+                            VIEW DETAILS
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+
+
+<!-- ================= WHY CHOOSE US ================= -->
+
+<section id="pages"
+         class="container-fluid bg-light py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="display-6 fw-bold">
+                Why Choose Us?
+            </h2>
+
+            <p class="text-secondary">
+                We make every celebration sweeter
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4">
+
+                <div class="card text-center h-100 border-0 shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <div class="display-4 mb-3">
+                            🎂
+                        </div>
+
+                        <h4>
+                            Fresh Cakes
+                        </h4>
+
+                        <p class="text-secondary">
+
+                            Our cakes are prepared fresh for
+                            birthdays and special occasions.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card text-center h-100 border-0 shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <div class="display-4 mb-3">
+                            🚚
+                        </div>
+
+                        <h4>
+                            Fast Delivery
+                        </h4>
+
+                        <p class="text-secondary">
+
+                            We aim to deliver your favourite
+                            cakes safely and on time.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card text-center h-100 border-0 shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <div class="display-4 mb-3">
+                            ❤️
+                        </div>
+
+                        <h4>
+                            Made With Love
+                        </h4>
+
+                        <p class="text-secondary">
+
+                            Every cake is prepared with care
+                            and attention to quality.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact"
+         class="container py-5">
+
+    <div class="row g-5">
+
+
+        <div class="col-lg-6">
+
+            <h2 class="display-6 fw-bold">
+                Get In Touch
+            </h2>
+
+            <p class="text-secondary mt-4 lh-lg">
+
+                Have a question about our cakes?
+                Send us a message and we will be happy
+                to help you.
+
+            </p>
+
+
+            <div class="mt-4">
+
+                <p>
+                    📍 Krishnanagar, West Bengal
+                </p>
+<p>
+    📞 <a href="tel:+919876543210"
+           class="text-dark text-decoration-none">
+        +91 98765 43210
+    </a>
+</p>
+
+                <p>
+                    ✉️ sweetcake@example.com
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-6">
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Your Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Your Message
+                    </label>
+
+                    <textarea
+                        name="message"
+                        class="form-control"
+                        rows="5"
+                        required></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-warning text-white px-4">
+
+                    SEND MESSAGE
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MAP ================= -->
+
+<section class="container-fluid">
+
+    <div class="ratio ratio-21x9">
+
+        <iframe
+            src="https://www.google.com/maps?q=Krishnanagar,West+Bengal&output=embed"
+            title="Sweet Cake Location"
+            allowfullscreen
+            loading="lazy">
+        </iframe>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="bg-dark text-white py-5">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4">
+
+                <h5 class="text-warning">
+                    WORKING HOURS
+                </h5>
+
+                <p class="text-secondary">
+
+                    Monday - Friday:
+                    09:00 am - 09:30 pm
+
+                    <br><br>
+
+                    Saturday:
+                    09:00 am - 08:30 pm
+
+                    <br><br>
+
+                    Sunday:
+                    09:00 am - 05:30 pm
+
+                </p>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <h3>
+                    🧁 cake
+                </h3>
+
+                <p class="text-secondary">
+
+                    Sweet Cake Shop brings delicious
+                    cakes and beautiful moments to
+                    your doorstep.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <h5 class="text-warning">
+                    SUBSCRIBE
+                </h5>
+
+                <p class="text-secondary">
+                    Get latest updates and offers.
+                </p>
+
+
+                <form method="post"
+                      class="input-group">
+
+                    {% csrf_token %}
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="Your Email"
+                        required>
+
+                    <button
+                        type="submit"
+                        class="btn btn-warning">
+
+                        ➤
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <hr class="border-secondary my-4">
+
+
+        <div class="text-center text-secondary small">
+
+            © 2026 Sweet Cake Shop |
+            All Rights Reserved
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

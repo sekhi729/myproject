@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout - Sweet Cake{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Checkout</h1>
+        <p class="text-secondary">Review your order and place it</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Order Summary -->
+        <div class="col-md-7">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Your Order</h5>
+                </div>
+
+                <div class="card-body">
+
+                    {% for item in cart_items %}
+
+                    <div class="row align-items-center border-bottom py-3">
+
+                        <div class="col-3">
+                            <img
+                                src="{{ item.cake.image_url }}"
+                                class="img-fluid rounded"
+                                alt="{{ item.cake.name }}">
+                        </div>
+
+                        <div class="col-6">
+
+                            <h6 class="fw-bold mb-1">
+                                {{ item.cake.name }}
+                            </h6>
+
+                            <p class="text-secondary small mb-1">
+                                {{ item.cake.category.name }}
+                            </p>
+
+                            <p class="mb-0">
+                                Quantity:
+                                <strong>{{ item.quantity }}</strong>
+                            </p>
+
+                        </div>
+
+                        <div class="col-3 text-end">
+
+                            <p class="fw-bold mb-0">
+                                ₹{{ item.cake.price }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                    <div class="d-flex justify-content-between mt-4">
+
+                        <h5 class="fw-bold">
+                            Total Amount
+                        </h5>
+
+                        <h5 class="fw-bold text-warning">
+                            ₹{{ total_amount }}
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Payment Section -->
+        <div class="col-md-5">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Payment Method</h5>
+                </div>
+
+                <div class="card-body">
+
+                    {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+
+                    <form method="POST"
+                          action="{% url 'place_order' %}"
+                          id="checkout-form">
+
+                        {% csrf_token %}
+<div class="mb-3">
+
+    <label class="form-label fw-bold">
+        Delivery Address
+    </label>
+
+    <textarea
+        name="delivery_address"
+        class="form-control"
+        rows="3"
+        placeholder="Enter your delivery address"
+        required></textarea>
+
+</div>
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Select Payment Method
+                            </label>
+
+                            <select
+                                name="payment_method"
+                                id="payment-method"
+                                class="form-select"
+                                required>
+
+                                <option value="COD">
+                                    Cash on Delivery
+                                </option>
+
+                                <option value="UPI">
+                                    UPI
+                                </option>
+
+                                <option value="CARD">
+                                    Card
+                                </option>
+
+                                <option value="RAZORPAY">
+                                    Online Payment (Razorpay)
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        
+
+                        <!-- Razorpay Button -->
+
+                        <button
+                            type="button"
+                            id="razorpay-button"
+                            class="btn btn-warning w-100 mt-2">
+
+                            💳 Pay with Razorpay
+
+                        </button>
+
+
+                        <!-- Normal Order Button -->
+
+                        <button
+                            type="submit"
+                            class="btn btn-dark w-100 mt-2">
+
+                            📦 Place Order
+
+                        </button>
+
+                    </form>
+
+
+                    <a href="{% url 'cart' %}"
+                       class="btn btn-outline-secondary w-100 mt-2">
+
+                        ← Back to Cart
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+document.getElementById("razorpay-button").onclick = function () {
+
+    var form = document.getElementById("checkout-form");
+
+    var address = form.querySelector(
+        'textarea[name="delivery_address"]'
+    ).value.trim();
+
+    if (!address) {
+
+        alert("Please enter your delivery address.");
+
+        return;
+
+    }
+
+    var paymentMethod = document.getElementById(
+        "payment-method"
+    ).value;
+
+    if (paymentMethod !== "RAZORPAY") {
+
+        alert("Please select Online Payment (Razorpay).");
+
+        return;
+
+    }
+
+    var confirmPayment = confirm(
+        "Demo Payment\n\n" +
+        "Amount: ₹{{ total_amount }}\n\n" +
+        "Click OK to simulate successful payment."
+    );
+
+    if (confirmPayment) {
+
+        alert(
+            "Payment successful!\n" +
+            "Your order will now be placed."
+        );
+
+        document.getElementById(
+            "payment-method"
+        ).value = "CARD";
+
+        form.submit();
+
+    }
+
+};
+
+</script>
+
+{% endblock %}

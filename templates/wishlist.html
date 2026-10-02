@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}My Wishlist - Sweet Cake{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold">
+            ❤️ My Wishlist
+        </h1>
+
+        <p class="text-secondary">
+            Your favourite cakes
+        </p>
+
+    </div>
+
+
+    {% if wishlist_items %}
+
+        <div class="row g-4">
+
+            {% for item in wishlist_items %}
+
+                <div class="col-sm-6 col-lg-3">
+
+                    <div class="card h-100 shadow-sm border-0">
+
+                        <div class="ratio ratio-4x3">
+
+                            <img
+                                src="{{ item.cake.image_url }}"
+                                class="w-100 h-100 object-fit-cover rounded-top"
+                                alt="{{ item.cake.name }}">
+
+                        </div>
+
+
+                        <div class="card-body text-center">
+
+                            <h5 class="fw-bold text-uppercase">
+                                {{ item.cake.name }}
+                            </h5>
+
+                            <p class="text-secondary small">
+                                {{ item.cake.category.name }}
+                            </p>
+
+                            <h5 class="text-warning fw-bold">
+                                ₹{{ item.cake.price }}
+                            </h5>
+
+
+                            <form method="post"
+                                  action="{% url 'toggle_wishlist' item.cake.id %}">
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-outline-danger btn-sm">
+
+                                    ❤️ Remove
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="alert alert-warning text-center">
+
+            Your wishlist is empty.
+
+        </div>
+
+    {% endif %}
+
+
+    <div class="text-center mt-5">
+
+        <a href="{% url 'home' %}#shop"
+           class="btn btn-dark px-4">
+
+            ← Continue Shopping
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+Django==5.2.17
+django-jazzmin==3.0.5
+django-mathfilters==1.0.0
+django-browser-reload==1.21.0
+django-tailwind==4.5.0
+pytailwindcss==0.3.1
+Pillow==12.0.0
+razorpay==2.0.1
+requests==2.34.2
+scikit-learn==1.9.1

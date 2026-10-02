@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Sweet Cake{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-5">
+
+            <div class="card p-4 shadow">
+
+                <h2 class="text-center mb-4">
+                    Create Account
+                </h2>
+
+                {% if error %}
+                    <div class="alert alert-danger text-center">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            name="username"
+                            class="form-control"
+                            placeholder="Enter username"
+                            required>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter email"
+                            required>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Phone
+                        </label>
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            class="form-control"
+                            placeholder="Enter phone number"
+                            maxlength="15"
+                            required>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Address
+                        </label>
+
+                        <textarea
+                            name="address"
+                            class="form-control"
+                            rows="3"
+                            placeholder="Enter your address"
+                            required></textarea>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Enter password"
+                            required>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            name="confirm_password"
+                            class="form-control"
+                            placeholder="Confirm password"
+                            required>
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-dark w-100">
+                        Register
+                    </button>
+
+                </form>
+
+
+                <p class="text-center mt-3 mb-0">
+
+                    Already have an account?
+
+                    <a href="{% url 'login' %}">
+                        Login
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
